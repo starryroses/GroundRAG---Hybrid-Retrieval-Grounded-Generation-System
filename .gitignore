@@ -1,0 +1,126 @@
+
+# Python
+
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Environment & Secrets
+
+.env
+.env.*
+!.env.example
+
+# API keys / credentials
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# Jupyter
+.ipynb_checkpoints/
+
+
+# IDE / OS
+.vscode/
+.idea/
+
+*.swp
+*.swo
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# RAG DATA
+# Raw / downloaded datasets
+data/
+datasets/
+
+# Generated document chunks
+chunks/
+
+# Keep directory structure if needed
+!data/.gitkeep
+
+# VECTOR DATABASES
+# ChromaDB
+chroma_db/
+chroma/
+.chroma/
+
+# Other possible vector indexes
+*.faiss
+*.index
+
+# EMBEDDINGS / MODELS
+models/
+checkpoints/
+embeddings/
+
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+
+# Hugging Face / ML caches
+.cache/
+huggingface/
+transformers_cache/
+
+# RAG EXPERIMENT OUTPUTS
+outputs/
+output/
+results/
+experiments/
+
+# Generated evaluation files
+evaluation_results/
+eval_results/
+
+# Logs
+logs/
+*.log
+
+# ML / Experiment Tracking
+wandb/
+mlruns/
+
+# Python Testing / Caches
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+.mypy_cache/
+.ruff_cache/
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+
+# Frontend (if React is added)
+node_modules/
+
+# Frontend build output
+frontend/dist/
+frontend/build/
+
+# Local Configuration
+*.local
+.local/

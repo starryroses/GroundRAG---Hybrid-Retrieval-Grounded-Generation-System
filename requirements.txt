@@ -1,0 +1,4 @@
+spacy
+rank-bm25
+chromadb
+sentence-transformers
