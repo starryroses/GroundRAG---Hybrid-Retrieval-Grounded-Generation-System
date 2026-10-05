@@ -41,8 +41,8 @@ class BM25Retriever:
                 RetrievalResult(
                     chunk_id=chunk.chunk_id,
                     text=chunk.text,
-                    rank=rank,
                     bm25_score=float(scores[index]),
+                    bm25_rank=rank,
                     metadata={
                         "document_id": chunk.document_id,
                         "document_name": chunk.document_name,
@@ -52,6 +52,6 @@ class BM25Retriever:
                         "source_path": chunk.source_path,
                     },
                 )
-           )
+            )
 
         return results

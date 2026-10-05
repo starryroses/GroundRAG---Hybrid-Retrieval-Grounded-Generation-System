@@ -33,10 +33,19 @@ class Chunk:
 class RetrievalResult:
     chunk_id: str
     text: str
-    rank: int
+
+    # Retrieval scores
     bm25_score: Optional[float] = None
     dense_score: Optional[float] = None
     dense_distance: Optional[float] = None
-
     fusion_score: Optional[float] = None
+
+    # Ranks from individual retrieval systems
+    bm25_rank: Optional[int] = None
+    dense_rank: Optional[int] = None
+    fusion_rank: Optional[int] = None
+    reranker_score: Optional[float] = None
+    reranker_rank: Optional[int] = None
+
+    # Metadata
     metadata: Optional[dict[str, any]] = None

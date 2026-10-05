@@ -8,7 +8,7 @@ class DenseRetriever:
     def __init__(
         self,
         persist_directory: str = "data/chroma_db",
-        collection_name: str = "bbc_chunks",
+        collection_name: str = "bbc_chunks_bge_small_cosine_v1",
         model_name: str = "BAAI/bge-small-en-v1.5",
     ):
 
@@ -25,15 +25,12 @@ class DenseRetriever:
         self.collection = self.client.get_or_create_collection(
             name=collection_name,
             metadata={
-                "description": "BBC News RAG chunk embeddings"
+                "hnsw:space": "cosine",
+                "embedding_model": model_name,
             },
         )
 
-    def index_chunks(
-        self,
-        chunks: list[Chunk],
-        batch_size: int = 64,
-    ):
+    def index_chunks(self,chunks: list[Chunk],batch_size: int = 64):
         if not chunks:
             raise ValueError("Cannot index an empty chunk list.")
 
@@ -46,22 +43,14 @@ class DenseRetriever:
             return
 
         for start in range(0, len(chunks), batch_size):
-            batch = chunks[
-                start:start + batch_size
-            ]
-            texts = [
-                chunk.text
-                for chunk in batch
-            ]
+            batch = chunks[start:start + batch_size]
+            texts = [chunk.text for chunk in batch]
             embeddings = self.model.encode(
                 texts,
                 normalize_embeddings=True,
                 show_progress_bar=False,
             )
-            ids = [
-                chunk.chunk_id
-                for chunk in batch
-            ]
+            ids = [chunk.chunk_id for chunk in batch]
 
             documents = texts
             metadatas = [
@@ -86,52 +75,31 @@ class DenseRetriever:
                 f"/{len(chunks)} chunks"
             )
 
-    def search(
-        self,
-        query: str,
-        top_k: int = 10,
-    ) -> list[dict]:
-
+    def search(self, query: str,top_k: int = 10,) -> list[RetrievalResult]:
         query_embedding = self.model.encode(
             [query],
             normalize_embeddings=True,
         )
-        results = self.collection.query(
+        chroma_results = self.collection.query(
             query_embeddings=query_embedding.tolist(),
             n_results=top_k,
-            include=[
-                "documents",
-                "metadatas",
-                "distances",
-            ],
+            include=["documents","metadatas","distances"],
         )
 
         retrieved = []
-        ids = results["ids"][0]
-        documents = results["documents"][0]
-        metadatas = results["metadatas"][0]
-        distances = results["distances"][0]
-        for rank, (
-            chunk_id,
-            document,
-            metadata,
-            distance,
-        ) in enumerate(
-            zip(
-                ids,
-                documents,
-                metadatas,
-                distances,
-            ),
-            start=1,
-        ):
+        ids = chroma_results["ids"][0]
+        documents = chroma_results["documents"][0]
+        metadatas = chroma_results["metadatas"][0]
+        distances = chroma_results["distances"][0]
+
+        for rank, (chunk_id,document,metadata,distance) in enumerate(zip(ids, documents,metadatas,distances), start=1):
             retrieved.append(
                 RetrievalResult(
                     chunk_id=chunk_id,
                     text=document,
-                    rank=rank,
                     dense_score=1.0 - float(distance),
                     dense_distance=float(distance),
+                    dense_rank=rank,
                     metadata=metadata,
                 )
             )
