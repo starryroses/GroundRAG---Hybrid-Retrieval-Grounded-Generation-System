@@ -49,3 +49,21 @@ class RetrievalResult:
 
     # Metadata
     metadata: Optional[dict[str, any]] = None
+
+@dataclass
+class Citation:
+    citation_id: int
+    chunk_id: str
+    document_name: str
+    category: str
+    text: str
+
+
+@dataclass
+class RAGResponse:
+    query: str
+    answer: str
+    citations: list[Citation]
+    grounded: bool
+    grounding_reason: str
+    retrieval_results: list[RetrievalResult]
