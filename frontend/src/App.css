@@ -1,0 +1,155 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: #f7f7f8;
+  color: #1f1f1f;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+
+.header {
+  padding: 20px 32px;
+  border-bottom: 1px solid #e5e5e5;
+  background: white;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.header p {
+  margin: 5px 0 0;
+  color: #777;
+  font-size: 14px;
+}
+
+/* Chat */
+
+.chat-container {
+  width: min(900px, 100%);
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.messages {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty-state {
+  text-align: center;
+  color: #666;
+}
+
+.empty-state h2 {
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  margin: 0;
+}
+
+/* Input */
+
+.input-area {
+  display: flex;
+  gap: 10px;
+  padding-top: 20px;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 13px 16px;
+  border: 1px solid #d5d5d5;
+  border-radius: 8px;
+  outline: none;
+  background: white;
+}
+
+.input-area input:focus {
+  border-color: #888;
+}
+
+.input-area button {
+  padding: 0 22px;
+  border: none;
+  border-radius: 8px;
+  background: #222;
+  color: white;
+  cursor: pointer;
+}
+
+.input-area button:hover {
+  background: #444;
+}
+
+/* Messages */
+
+.message-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+
+.message-row {
+  display: flex;
+}
+
+.user-row {
+  justify-content: flex-end;
+}
+
+.assistant-row {
+  justify-content: flex-start;
+}
+
+.message-bubble {
+  max-width: 75%;
+  padding: 12px 16px;
+  border-radius: 12px;
+}
+
+.user-message {
+  background: #222;
+  color: white;
+}
+
+.assistant-message {
+  background: white;
+  border: 1px solid #e5e5e5;
+}
+
+.message-role {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  opacity: 0.65;
+}
+
+.message-content {
+  line-height: 1.5;
+}

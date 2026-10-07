@@ -41,7 +41,16 @@ IMPORTANT:
 - Do not put citations in a separate bibliography.
 - Do not use any citation format other than [Evidence N].
 
-Keep the answer concise and directly answer the question.
+ANSWER STYLE:
+
+- Give a clear and moderately detailed answer.
+- Prefer 4-6 sentences when the evidence supports additional detail.
+- Include relevant supporting details from the evidence, such as
+  dates, numbers, events, causes, people, or outcomes.
+- Do not add details merely to make the answer longer.
+- Do not repeat the same fact in multiple ways.
+- If the evidence only supports a short answer, keep the answer short.
+- Every factual statement must have a citation.
 """
 
 

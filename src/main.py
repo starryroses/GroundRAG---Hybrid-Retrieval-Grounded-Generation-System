@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from src.app.container import RAGContainer
 from src.app import state
 from src.api.routes import router
+from fastapi.middleware.cors import CORSMiddleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -35,6 +36,14 @@ app = FastAPI(
 )
 
 app.include_router(router)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/health")
 def health_check():
